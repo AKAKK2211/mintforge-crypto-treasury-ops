@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy the Crypto Treasury Ops Pack — $79 USDC</title>
+<meta name="description" content="Buy the Crypto Treasury & Bookkeeping SOP Pack for $79 one-time, paid in USDC. Instant delivery after on-chain verification.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav"><span class="brand">◈ Crypto Treasury Ops</span><a href="index.html">← Back</a></header>
+
+<section class="panel" style="max-width:640px">
+  <h2>Buy the Ops Pack — $79 one-time (USDC)</h2>
+  <p class="note">What's inside: treasury playbook, bookkeeping SOP, templates (transaction log + wallet inventory), monthly close checklist, tax readiness framework. Instant delivery after verification.</p>
+
+  <h2 style="margin-top:20px">How payment works</h2>
+  <ol>
+    <li><b>Send $79 USDC</b> (Ethereum mainnet, ERC-20) to the address below — exact amount.</li>
+    <li><b>Copy your transaction hash</b> after confirmation.</li>
+    <li><b>Paste it below</b> — we verify on-chain and email your download link within minutes.</li>
+  </ol>
+  <div class="addrbox" style="background:#0e131c;border:1px dashed #2c3545;border-radius:8px;padding:14px;text-align:center;margin:14px 0">
+    <div style="font-size:11px;letter-spacing:1px;color:#9aa5b4">RECEIVE ADDRESS (USDC · ERC-20 · Ethereum) — receive-only</div>
+    <code id="addr" style="display:block;font-size:14px;word-break:break-all;margin:8px 0;color:#fbbf24">0x332A6965Ca3eB43D70A8b8006b1162c8Fe0E48B2</code>
+    <button id="copyBtn" style="background:#e9edf3;color:#0e1014;border:none;padding:7px 14px;border-radius:6px;cursor:pointer">Copy address</button>
+  </div>
+
+  <form id="orderForm">
+    <label style="display:block;margin:10px 0 4px;font-weight:600;font-size:14px">Your email <input type="email" id="fEmail" required placeholder="you@example.com" style="width:100%;padding:11px;border:1px solid #232a36;border-radius:8px;font-size:15px;margin-top:4px;background:#0e131c;color:#e9edf3"></label>
+    <label style="display:block;margin:10px 0 4px;font-weight:600;font-size:14px">Your org type (optional) <input type="text" id="fOrg" placeholder="e.g. DAO / LLC / solo founder" style="width:100%;padding:11px;border:1px solid #232a36;border-radius:8px;font-size:15px;margin-top:4px;background:#0e131c;color:#e9edf3"></label>
+    <label style="display:block;margin:10px 0 4px;font-weight:600;font-size:14px">USDC transaction hash <input type="text" id="fTx" required pattern="0x[0-9a-fA-F]{64}" placeholder="0x… (64 hex chars)" style="width:100%;padding:11px;border:1px solid #232a36;border-radius:8px;font-size:15px;margin-top:4px;background:#0e131c;color:#e9edf3"></label>
+    <button type="submit" class="cta" style="margin-top:14px">Buy pack — $79</button>
+    <p class="note">After verification (usually minutes) we email your download link. If we cannot deliver, you get a full refund of the received amount.</p>
+  </form>
+  <div id="orderResult"></div>
+</section>
+
+<footer><p class="fine">Crypto Treasury Ops · one-time digital product · receive-only USDC</p></footer>
+<script>
+const ADDR = '0x332A6965Ca3eB43D70A8b8006b1162c8Fe0E48B2';
+document.getElementById('addr').textContent = ADDR;
+document.getElementById('copyBtn').addEventListener('click', () => {
+  navigator.clipboard.writeText(ADDR).then(() => { document.getElementById('copyBtn').textContent = 'Copied ✓'; setTimeout(() => document.getElementById('copyBtn').textContent = 'Copy address', 1500); });
+});
+document.getElementById('orderForm').addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  const email = document.getElementById('fEmail').value.trim();
+  const org = document.getElementById('fOrg').value.trim();
+  const tx = document.getElementById('fTx').value.trim();
+  if (!/^0x[0-9a-fA-F]{64}$/.test(tx)) { document.getElementById('orderResult').innerHTML = '<span style="color:#f87171">Transaction hash must be 0x + 64 hex chars.</span>'; return; }
+  try {
+    const k = 'cto_orders'; const arr = JSON.parse(localStorage.getItem(k) || '[]');
+    arr.push({ product: 'Crypto Treasury Ops Pack', priceUsd: 79, email, org, tx, ts: new Date().toISOString() });
+    localStorage.setItem(k, JSON.stringify(arr));
+  } catch (e) {}
+  const body = encodeURIComponent(`CRYPTO TREASURY OPS order\nEmail: ${email}\nOrg: ${org}\nTx: ${tx}\n\nVerify on-chain, email download link.`);
+  document.getElementById('orderResult').innerHTML = `<span style="color:#34d399;font-weight:700">Order recorded ✓</span><br>
+    <a href="mailto:?subject=${encodeURIComponent('Crypto Treasury Ops order ' + tx)}&body=${body}">Email the order + tx hash to fulfillment</a><br>
+    <small>We verify ${tx.slice(0, 10)}… on-chain and deliver to ${email}.</small>`;
+});
+</script>
+</body>
+</html>
