@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USDC Accounting: Tracking Stablecoin Transactions Correctly</title>
+<meta name="description" content="A practical USDC accounting guide: 6-decimal precision, transfer vs payment, fee handling, USD value tracking, and the monthly close that keeps stablecoin books audit-ready.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="nav"><span class="brand">◈ Crypto Treasury Ops</span><a class="cta small" href="../checkout.html">Get the pack — $79</a></header>
+<section class="panel" style="max-width:760px">
+<h1>USDC Accounting: Tracking Stablecoin Transactions Correctly</h1>
+
+<h2>Precision matters: USDC has 6 decimals</h2>
+<p>USDC amounts on-chain are integer values in 6-decimal units (1 USDC = 1,000,000 units). When you export transactions, amounts like "500000000" mean $500.00. Get this conversion right or every report is off by a factor of a million.</p>
+<h2>Stablecoin ≠ free of bookkeeping</h2>
+<p>USDC may be "stable," but your books still need: payment vs transfer classification, fee/gas handling (is the network fee an expense or part of the transaction?), USD value at the time of each transaction, and invoice matching (which customer payment paid which invoice).</p>
+<h2>The monthly close</h2>
+<p>1. Export every wallet from the chain explorer → 2. Match every hash to your log → 3. Verify all customer payments landed (the revenue check) → 4. Confirm internal transfers aren't counted as income → 5. Record USD values at transaction time → 6. File the month read-only.</p>
+<p>The ready-made transaction log, wallet inventory and 12-step close checklist are in the <a href="../checkout.html">Crypto Treasury Ops Pack ($79)</a>.</p>
+</section>
+<footer>
+  <p class="fine">Crypto Treasury Ops · one-time digital product · receive-only USDC · no subscription</p>
+  <p class="fine">◈ MINTFORGE portfolio: <a href="https://akakk2211.github.io/mintforge-taxappeal-kit/">TaxAppeal Kit</a> · <a href="https://akakk2211.github.io/mintforge-grantchain/">GrantChain</a> · <a href="https://akakk2211.github.io/mintforge-seo-audits/">SEO Audits</a></p>
+</footer>
+</body>
+</html>
